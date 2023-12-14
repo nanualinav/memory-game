@@ -1,10 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { keyframes } from '@chakra-ui/react'
 import {
     Box,
     HStack,
     Text
-} from '@salesforce/retail-react-app/app/components/shared/ui/index'
+} from '@chakra-ui/react'
 
 const fadeInOut = keyframes`
   0% {
@@ -43,4 +44,8 @@ const Timer = ({ seconds, isGameOver }) => {
     )
 }
 
+Timer.propTypes = {
+    seconds: PropTypes.number.isRequired,
+    isGameOver: PropTypes.bool.isRequired,
+}
 export default Timer
