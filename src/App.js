@@ -4,7 +4,6 @@ import Timer from './partials/timer'
 import Card from './partials/card'
 import { 
   ChakraProvider, 
-  Container, 
   Text, 
   Button,
   Box,
@@ -27,7 +26,7 @@ import hodgehog from './img/hedgehog.png'
 import owl from './img/owl.png'
 import rabbit from './img/rabbit.png'
 import gameEnd from './img/complete.png'
-import gameOver from './img/gameover.png'
+import gameOverImg from './img/gameover.png'
 
 const cardInfo = [
   { src: bear, name: 'Bear', matched: false},
@@ -136,8 +135,8 @@ function App() {
                     <VStack
                         spacing={4} width="700px">
                         <MenuButton onClick={shuffleCards}>Play</MenuButton>
-                        <MenuButton></MenuButton>
-                        <MenuButton></MenuButton>
+                        <MenuButton>Scores</MenuButton>
+                        <MenuButton>About</MenuButton>
                         <MenuButton></MenuButton>
                         <MenuButton></MenuButton>
                     </VStack>
@@ -171,7 +170,7 @@ function App() {
                     <ModalBody align="center">
                         <HStack>
                             <Image
-                                src={timer === 0 ? gameOver : gameEnd}
+                                src={timer === 0 ? gameOverImg : gameEnd}
                                 alt="Game Over"></Image>
                             <Text fontSize="5xl">{timer === 0 ? "Game Over" : "Congrats!"}</Text>
                         </HStack>
