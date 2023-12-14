@@ -1,6 +1,7 @@
 import React from "react"
 import { keyframes } from '@emotion/react'
 import { Box } from '@chakra-ui/react'
+import PropTypes from 'prop-types'
 
 const rotateAnimation = keyframes`
     0%, 100% {
@@ -28,6 +29,11 @@ const MenuButton = ({ children = '', onClick = () => { } }) => {
             {children}
         </Box>
     )
+}
+
+MenuButton.propTypes = {
+    children: PropTypes.node.isRequired,
+    onClick: PropTypes.func.isRequired,
 }
 
 export default MenuButton

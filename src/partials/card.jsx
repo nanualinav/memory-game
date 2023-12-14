@@ -4,6 +4,7 @@ import {
     Image,
     Text
 } from '@chakra-ui/react'
+import PropTypes from 'prop-types'
 
 const Card = ({ card, handleChoice, isFlipped, disabled }) => {
     const handleClick = () => {
@@ -55,6 +56,13 @@ const Card = ({ card, handleChoice, isFlipped, disabled }) => {
             </Box>
         </Box>
     )
+}
+
+Card.propTypes = {
+    card: PropTypes.object.isRequired,
+    handleChoice: PropTypes.func.isRequired,
+    isFlipped: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool.isRequired,
 }
 
 export default Card
