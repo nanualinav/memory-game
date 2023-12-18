@@ -123,7 +123,7 @@ function App() {
   return (
   <ChakraProvider>
     <VStack
-            mt="4" align="center">
+            mt="70px" align="center">
             <Heading
                 as="h3" size="lg"
                 mb="4" color="gray.800"
