@@ -33,6 +33,7 @@ const Card = ({ card, handleChoice, isFlipped, disabled }) => {
                 <Text
                     align="center"
                     my={3} color="gray.700"
+                    fontSize="18px"
                 >{card.name}
                 </Text>
             </Box>
