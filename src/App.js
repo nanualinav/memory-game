@@ -61,7 +61,15 @@ function App() {
    }
 
   const handleUserChoice = (card) => {
-    firstChoice ? setSecondChoice(card) : setFirstChoice(card)
+    if (card.matched || card === firstChoice || card === secondChoice) {
+      return
+    }
+
+    if (firstChoice === null) {
+      setFirstChoice(card)
+    } else {
+      setSecondChoice(card)
+    }
   }
 
   useEffect(() => {
