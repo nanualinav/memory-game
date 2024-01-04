@@ -144,8 +144,8 @@ function App() {
                     <VStack
                         spacing={4} width="700px">
                         <MenuButton onClick={shuffleCards}>Play</MenuButton>
-                        <MenuButton>Scores</MenuButton>
-                        <MenuButton>About</MenuButton>
+                        <MenuButton></MenuButton>
+                        <MenuButton></MenuButton>
                         <MenuButton></MenuButton>
                         <MenuButton></MenuButton>
                     </VStack>
