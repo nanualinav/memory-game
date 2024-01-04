@@ -123,7 +123,8 @@ function App() {
   return (
   <ChakraProvider>
     <VStack
-            mt="70px" align="center">
+            mt="70px" align="center"
+            >
             <Heading
                 as="h3" size="lg"
                 mb="4" color="gray.800"
@@ -165,7 +166,7 @@ function App() {
                 isOpen={gameOver || isGameComplete}
                 nClose={() => { }}
                 isCentered>
-                <ModalOverlay />
+                <ModalOverlay size="100vh"/>
                 <ModalContent p={5}>
                     <ModalBody align="center">
                         <HStack>
