@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import MenuButton from './partials/menu-button'
 import Timer from './partials/timer'
 import Card from './partials/card'
+import AboutCard from './partials/about-card'
 import { 
   ChakraProvider, 
   Text, 
@@ -15,8 +16,10 @@ import {
   ModalOverlay,
   ModalContent,
   ModalBody,
-  Image
+  Image,
+  Container,
 } from '@chakra-ui/react'
+import { extendTheme } from '@chakra-ui/react'
 
 // images
 import bear from './img/bear.png'
@@ -28,6 +31,13 @@ import rabbit from './img/rabbit.png'
 import gameEnd from './img/complete.png'
 import gameOverImg from './img/gameover.png'
 
+const theme = extendTheme({
+  fonts: {
+    heading: 'Montserrat, sans-serif',
+    body: 'Montserrat, sans-serif',
+  },
+});
+
 const cardInfo = [
   { src: bear, name: 'Bear', matched: false},
   { src: bird, name: 'Bird', matched: false},
@@ -38,18 +48,20 @@ const cardInfo = [
 ]
 
 const vShapeStyle = {
-  clipPath: "polygon(0 0, 100% 0, 50% 100%)"
+  clipPath: 'polygon(0 0, 100% 0, 50% 100%)'
 }
 
 function App() {
   const [cards, setCards] = useState([])
   const [showMenu, setShowMenu] = useState(true)
+  const [showAbout, setShowAbout] = useState(false)
   const [firstChoice, setFirstChoice] = useState(null)
   const [secondChoice, setSecondChoice] = useState(null)
   const [isDisabled, setIsDisabled] = useState(false)
   const [timer, setTimer] = useState(90)
   const [gameOver, setGameOver] = useState(false)
   const [isGameComplete, setIsGameComplete] = useState(false)
+  const [headingText, setHeadingText] = useState('Memory Game')
 
   const shuffleCards = () => {
     const shuffledCards = [...cardInfo, ...cardInfo]
@@ -58,6 +70,7 @@ function App() {
 
       setCards(shuffledCards)
       setShowMenu(false)
+      setHeadingText('Welcome!')
    }
 
   const handleUserChoice = (card) => {
@@ -125,39 +138,78 @@ function App() {
     const handleGameRestart = () => {
       setGameOver(false)
       setShowMenu(true)
+      setShowAbout(false)
       setIsGameComplete(false)
       setTimer(90)
+      setHeadingText('Memory Game')
     }
-  return (
-  <ChakraProvider>
-    <VStack
-            mt="70px" align="center"
+
+    const handleShowAbout = () => {
+      setShowMenu(false)
+      setShowAbout(true)
+      setHeadingText('About')
+    }
+
+    const handleBackFromAbout = () => {
+      setShowMenu(true)
+      setShowAbout(false)
+      setGameOver(false)
+      setIsGameComplete(false)
+      setHeadingText('Memory Game')
+    }
+
+   return (
+  <ChakraProvider theme={theme}>
+    <Box 
+      w='100vw'
+      minHeight='100vh'
+      backgroundColor={showMenu ? '#7E84D4' : 'F0EFE9'}
+      display='flex'
+      alignItems='top'
+      >
+    <Container align='center'
+               maxWidth='100%'>
+            <VStack 
+              mt='70px' align='center'
             >
             <Heading
-                as="h3" size="lg"
-                mb="4" color="gray.800"
-            >Memory Game
-
+                as='h3' size='2xl' fontWeight='800'
+                mb='4rem' color={showMenu ? '#F0EFE9' : '#4B4B4B'}
+            >{headingText}
             </Heading>
             {showMenu ? (
-                <Box style={vShapeStyle} >
+                <Box style={vShapeStyle}>
                     <VStack
-                        spacing={4} width="700px">
+                        spacing={4} width='700px'>
                         <MenuButton onClick={shuffleCards}>Play</MenuButton>
-                        <MenuButton></MenuButton>
-                        <MenuButton></MenuButton>
+                        <MenuButton onClick={handleShowAbout}>About</MenuButton>
+                        <MenuButton>Scores</MenuButton>
                         <MenuButton></MenuButton>
                         <MenuButton></MenuButton>
                     </VStack>
                 </Box>
+            ) : showAbout ? (
+              <>
+                <AboutCard />
+                <Button colorScheme='purple' top={'2rem'} onClick={handleBackFromAbout}>
+                    Go Back
+                  </Button>
+                </>
             ) : (
-                <Box vh="100%">
-                    <Timer
+                <Box vh='100%'>
+                  <HStack justify='space-between' w='100%' mb='1rem'>
+                  <Timer
                         seconds={timer}
                         isGameOver={gameOver} />
+                        <Button colorScheme='orange' borderRadius='50' onClick={handleGameRestart}>Exit Game</Button>
+                  </HStack>
                     <Grid
-                        templateColumns='repeat(6, 1fr)'
-                        gap={6}
+                        templateColumns={{
+                          base: 'repeat(3, 1fr)',
+                          md: 'repeat(4, 1fr)',
+                          lg: 'repeat(6, 1fr)',
+                        }}
+                        gap='2rem'
                     >{cards.map(card => (
                         <Card
                             key={card.id}
@@ -169,29 +221,33 @@ function App() {
                     </Grid>
                 </Box>
             )}
-
             <Modal
-                isOpen={gameOver || isGameComplete}
-                nClose={() => { }}
+                isOpen={(gameOver || isGameComplete) && !showAbout && !showMenu}
+                onClose={() => { }}
                 isCentered>
-                <ModalOverlay size="100vh"/>
-                <ModalContent p={5}>
-                    <ModalBody align="center">
+                <ModalOverlay size='100vh'/>
+                <ModalContent p='rem'>
+                    <ModalBody align='center' p = '2rem'>
                         <HStack>
                             <Image
+                                mr='2rem'
                                 src={timer === 0 ? gameOverImg : gameEnd}
-                                alt="Game Over"></Image>
-                            <Text fontSize="5xl">{timer === 0 ? "Game Over" : "Congrats!"}</Text>
+                                alt='Game Over'></Image>
+                            <Text fontSize='3xl' fontWeight='medium'>{timer === 0 ? 'Time is Over!' : 'Congrats!'}</Text>
                         </HStack>
                         <Button
-                            colorScheme="gray.500"
-                            variant="ghost" mt={4}
+                            backgroundColor='#7E84D4'
+                            color='white'
+                            borderRadius='28px'
+                            variant='ghost' mt={4}
                             onClick={handleGameRestart}
                         >Try Again</Button>
                     </ModalBody>
                 </ModalContent>
             </Modal>
         </VStack>
+        </Container>
+        </Box>
   </ChakraProvider>
   ) 
 }

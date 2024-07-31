@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import { keyframes } from '@emotion/react'
 import { Box } from '@chakra-ui/react'
 import PropTypes from 'prop-types'
@@ -16,10 +16,12 @@ const MenuButton = ({ children = '', onClick = () => { } }) => {
     return (
         <Box
             as='button'
-            bg='teal.400'
+            bg='#F0EFE9'
             width='100%'
             height='50px'
-            fontSize="2xl"
+            fontSize='2xl'
+            fontWeight='600'
+            color='#ED6CEA'
             transition='background-color 0.2s'
             _hover={{
                 animation: `${rotateAnimation} 1s ease-in`,
@@ -34,6 +36,11 @@ const MenuButton = ({ children = '', onClick = () => { } }) => {
 MenuButton.propTypes = {
     children: PropTypes.node.isRequired,
     onClick: PropTypes.func.isRequired,
+}
+
+MenuButton.defaultProps = {
+    children: '',
+    onClick: () => { }
 }
 
 export default MenuButton
