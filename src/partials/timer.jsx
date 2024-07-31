@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { keyframes } from '@chakra-ui/react'
 import {
-    Box,
-    HStack,
-    Text
+  Box,
+  HStack,
+  Text
 } from '@chakra-ui/react'
 
 const fadeInOut = keyframes`
@@ -20,32 +20,32 @@ const fadeInOut = keyframes`
 `
 
 const Timer = ({ seconds, isGameOver }) => {
-    const formatTime = () => {
-        const minutes = Math.floor(seconds / 60)
-        const remainingSeconds = seconds % 60
+  const formatTime = () => {
+    const minutes = Math.floor(seconds / 60)
+    const remainingSeconds = seconds % 60
 
-        const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`
-        const formattedSeconds = remainingSeconds < 10 ? `0${remainingSeconds}` : `${remainingSeconds}`
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`
+    const formattedSeconds = remainingSeconds < 10 ? `0${remainingSeconds}` : `${remainingSeconds}`
 
-        return `${formattedMinutes}:${formattedSeconds}`
-    }
+    return `${formattedMinutes}:${formattedSeconds}`
+  }
 
-    return (
-        <HStack my={3}>
-            <Box
-                width="20px"
-                height="20px"
-                borderRadius="50%"
-                bgColor={!isGameOver ? "green.500" : "red.500"}
-                animation={!isGameOver ? `${fadeInOut} 1s linear infinite` : null}
-            />
-            <Text>{formatTime(seconds)}</Text>
-        </HStack>
-    )
+  return (
+    <HStack my={3}>
+      <Box
+        width='20px'
+        height='20px'
+        borderRadius='50%'
+        bgColor={!isGameOver ? '#92FCCC' : '#BF0000'}
+        animation={!isGameOver ? `${fadeInOut} 1s linear infinite` : null}
+      />
+      <Text>{formatTime(seconds)}</Text>
+    </HStack>
+  )
 }
 
 Timer.propTypes = {
-    seconds: PropTypes.number.isRequired,
-    isGameOver: PropTypes.bool.isRequired,
+  seconds: PropTypes.number.isRequired,
+  isGameOver: PropTypes.bool.isRequired,
 }
 export default Timer
