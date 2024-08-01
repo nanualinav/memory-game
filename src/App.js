@@ -241,26 +241,27 @@ function App() {
                 onClose={() => { }}
                 isCentered>
                 <ModalOverlay size='100vh'/>
-                <ModalContent p='rem'>
-                    <ModalBody align='center' p = '2rem'>
-                        <HStack>
+                <ModalContent p='2rem'>
+                    <ModalBody >
+                        <VStack align='center' justify='center' spacing={4}>
                             <Image
-                                mr='2rem'
                                 src={timer === 0 ? gameOverImg : gameEnd}
-                                alt='Game Over' />
-                            <Text fontSize='3xl' fontWeight='medium'>{timer === 0 ? 'Time is Over!' : 'Congrats!'}</Text>
-                        </HStack>
-                        <Button
+                                alt='Game Over' 
+                                />
+                            <Text fontSize='3xl' fontWeight='medium' textAlign='center'>{timer === 0 ? 'Time is Over!' : 'Congrats!'}
+                            </Text>
+                            <Button
                             backgroundColor='#7E84D4'
                             color='white'
                             borderRadius='28px'
                             variant='ghost' mt={4}
                             onClick={handleGameRestart}
-                        >Try Again</Button>
+                            >Try Again</Button>
+                          </VStack>
                     </ModalBody>
-                </ModalContent>
-            </Modal>
-        </VStack>
+                  </ModalContent>
+              </Modal>
+          </VStack>
         </Container>
         </Box>
   </ChakraProvider>
