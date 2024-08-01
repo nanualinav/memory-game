@@ -66,8 +66,9 @@ function App() {
   const shuffleCards = () => {
     const shuffledCards = [...cardInfo, ...cardInfo]
         .sort(() => Math.random() - 0.5)
-          .map((card) => ({ ...card, id: Math.random() }))
+        .map((card) => ({ ...card, id: Math.random() }))
 
+      resetGameState()
       setCards(shuffledCards)
       setShowMenu(false)
       setHeadingText('Welcome!')
@@ -123,7 +124,7 @@ function App() {
   useEffect(() => {
     const allCardsMatched = cards.every(card => card.matched);
 
-    if ((allCardsMatched || timer === 0) && !showMenu) {
+    if ((allCardsMatched || timer === 0) && !showMenu && cards.length > 0) {
       setIsGameComplete(true)
       setGameOver(true)
     }
@@ -135,13 +136,27 @@ function App() {
       setIsDisabled(false)
     }
 
-    const handleGameRestart = () => {
-      setGameOver(false)
-      setShowMenu(true)
-      setShowAbout(false)
-      setIsGameComplete(false)
+    const resetGameState = () => {
+      setCards([])
+      setFirstChoice(null)
+      setSecondChoice(null)
+      setIsDisabled(false)
       setTimer(90)
+      setGameOver(false)
+      setIsGameComplete(false)
+    }
+
+    const handleExitToMenu = () => {
+      resetGameState()
+      setShowMenu(true)
       setHeadingText('Memory Game')
+      setCards([])
+    }
+
+    const handleGameRestart = () => {
+      resetGameState()
+      shuffleCards()
+      setHeadingText('Welcome!')
     }
 
     const handleShowAbout = () => {
@@ -201,7 +216,7 @@ function App() {
                   <Timer
                         seconds={timer}
                         isGameOver={gameOver} />
-                        <Button colorScheme='orange' borderRadius='50' onClick={handleGameRestart}>Exit Game</Button>
+                        <Button colorScheme='orange' borderRadius='50' onClick={handleExitToMenu}>Exit Game</Button>
                   </HStack>
                     <Grid
                         templateColumns={{
@@ -222,7 +237,7 @@ function App() {
                 </Box>
             )}
             <Modal
-                isOpen={(gameOver || isGameComplete) && !showAbout && !showMenu}
+                isOpen={(gameOver || isGameComplete) && !showAbout && !showMenu && cards.length > 0}
                 onClose={() => { }}
                 isCentered>
                 <ModalOverlay size='100vh'/>
@@ -232,7 +247,7 @@ function App() {
                             <Image
                                 mr='2rem'
                                 src={timer === 0 ? gameOverImg : gameEnd}
-                                alt='Game Over'></Image>
+                                alt='Game Over' />
                             <Text fontSize='3xl' fontWeight='medium'>{timer === 0 ? 'Time is Over!' : 'Congrats!'}</Text>
                         </HStack>
                         <Button
