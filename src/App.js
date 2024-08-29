@@ -48,7 +48,8 @@ const cardInfo = [
 ]
 
 const vShapeStyle = {
-  clipPath: 'polygon(0 0, 100% 0, 50% 100%)'
+  clipPath: 'polygon(0 0, 100% 0, 50% 100%)',
+  width: '50%',
 }
 
 function App() {
@@ -189,8 +190,7 @@ function App() {
                 maxWidth='100%'
                >
             <VStack 
-              mt={{ base: '40px', md: '70px' }}  align='center'
-              spacing={8}
+              mt={{ base: '40px', md: '50px' }}  align='center'
             >
             <Heading
                 as='h3' size='2xl' fontWeight='800'
@@ -198,9 +198,17 @@ function App() {
             >{headingText}
             </Heading>
             {showMenu ? (
-                <Box style={vShapeStyle} display='flex' justifyContent='center' alignItems='center'>
+                <Box 
+                  style={vShapeStyle} 
+                  display='flex' 
+                  justifyContent='center' 
+                  alignItems='center'
+                  width={{ base: '100%', md: '60%', lg: '60%' }}
+                  overflowX="hidden"
+                  >
                     <VStack
-                        spacing={4} width={{ base: '90%', md: '700px'}}>
+                        spacing={4} width={{ base: '100%', md: '100%'}}
+                        >
                         <MenuButton onClick={shuffleCards}>Play</MenuButton>
                         <MenuButton onClick={handleShowAbout}>About</MenuButton>
                         <MenuButton>Scores</MenuButton>
