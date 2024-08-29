@@ -48,8 +48,7 @@ const cardInfo = [
 ]
 
 const vShapeStyle = {
-  clipPath: 'polygon(0 0, 100% 0, 50% 100%)',
-  width: '50%',
+  clipPath: 'polygon(0 0, 100% 0, 50% 100%)'
 }
 
 function App() {
@@ -203,7 +202,7 @@ function App() {
                   display='flex' 
                   justifyContent='center' 
                   alignItems='center'
-                  width={{ base: '100%', md: '60%', lg: '60%' }}
+                  width={{ base: '100%', md: '80%', lg: '50%' }}
                   overflowX="hidden"
                   >
                     <VStack

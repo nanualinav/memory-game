@@ -29,6 +29,10 @@ const MenuButton = ({ children = '', onClick = () => { } }) => {
                 animation: `${rotateAnimation} 1s ease-in`,
                 backgroundColor: 'orange.200',
             }}
+            _focus={{ outline: 'none' }}
+            _active={{
+            transform: 'none'
+      }}
             onClick={onClick}
         >
             {children}
