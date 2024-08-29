@@ -17,17 +17,19 @@ const MenuButton = ({ children = '', onClick = () => { } }) => {
         <Box
             as='button'
             bg='#F0EFE9'
-            width='100%'
-            height='50px'
-            fontSize='2xl'
+            width={{ base: '80%', md: '100%' }}
+            height={{ base: '50px', md: '60px' }}
+            fontSize={{ base: 'lg', md: '2xl' }}
             fontWeight='600'
             color='#ED6CEA'
             transition='background-color 0.2s'
+            padding={{ base: '0.75rem', md: '1rem' }}
             _hover={{
                 animation: `${rotateAnimation} 1s ease-in`,
                 backgroundColor: 'orange.200'
             }}
-            onClick={onClick}>
+            onClick={onClick}
+        >
             {children}
         </Box>
     )

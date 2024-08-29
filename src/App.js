@@ -174,28 +174,33 @@ function App() {
     }
 
    return (
-  <ChakraProvider theme={theme}>
-    <Box 
-      w='100vw'
+    <ChakraProvider theme={theme}>
+      <Box 
+      w='100%'
       minHeight='100vh'
       backgroundColor={showMenu ? '#7E84D4' : 'F0EFE9'}
       display='flex'
       alignItems='top'
+      justifyContent='center'
+      p={{ base: 4, md: 8 }}
+      overflowX="hidden"
       >
-    <Container align='center'
-               maxWidth='100%'>
+      <Container align='center'
+                maxWidth='100%'
+               >
             <VStack 
-              mt='70px' align='center'
+              mt={{ base: '40px', md: '70px' }}  align='center'
+              spacing={8}
             >
             <Heading
                 as='h3' size='2xl' fontWeight='800'
-                mb='4rem' color={showMenu ? '#F0EFE9' : '#4B4B4B'}
+                mb={{ base: '2rem', md: '4rem' }} color={showMenu ? '#F0EFE9' : '#4B4B4B'}
             >{headingText}
             </Heading>
             {showMenu ? (
-                <Box style={vShapeStyle}>
+                <Box style={vShapeStyle} display='flex' justifyContent='center' alignItems='center'>
                     <VStack
-                        spacing={4} width='700px'>
+                        spacing={4} width={{ base: '90%', md: '700px'}}>
                         <MenuButton onClick={shuffleCards}>Play</MenuButton>
                         <MenuButton onClick={handleShowAbout}>About</MenuButton>
                         <MenuButton>Scores</MenuButton>
@@ -206,17 +211,20 @@ function App() {
             ) : showAbout ? (
               <>
                 <AboutCard />
-                <Button colorScheme='purple' top={'2rem'} onClick={handleBackFromAbout}>
+                <Button colorScheme='purple' mt={{ base: '1rem', md: '2rem' }} onClick={handleBackFromAbout}>
                     Go Back
                   </Button>
                 </>
             ) : (
                 <Box vh='100%'>
-                  <HStack justify='space-between' w='100%' mb='1rem'>
+                  <HStack justify='space-between' w='100%' mb='1rem'
+                          flexDirection={{ base: 'column', md: 'row' }}
+                          >
                   <Timer
                         seconds={timer}
                         isGameOver={gameOver} />
-                        <Button colorScheme='orange' borderRadius='50' onClick={handleExitToMenu}>Exit Game</Button>
+                        <Button colorScheme='orange' borderRadius='50' mt={{ base: '1rem', md: 0 }} 
+                                onClick={handleExitToMenu}>Exit Game</Button>
                   </HStack>
                     <Grid
                         templateColumns={{
@@ -224,7 +232,7 @@ function App() {
                           md: 'repeat(4, 1fr)',
                           lg: 'repeat(6, 1fr)',
                         }}
-                        gap='2rem'
+                        gap={{ base: '1rem', md: '2rem' }}
                     >{cards.map(card => (
                         <Card
                             key={card.id}
@@ -240,7 +248,7 @@ function App() {
                 isOpen={(gameOver || isGameComplete) && !showAbout && !showMenu && cards.length > 0}
                 onClose={() => { }}
                 isCentered>
-                <ModalOverlay size='100vh'/>
+                <ModalOverlay size='100%'/>
                 <ModalContent p='2rem'>
                     <ModalBody >
                         <VStack align='center' justify='center' spacing={4}>

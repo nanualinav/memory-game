@@ -16,8 +16,8 @@ const Card = ({ card, handleChoice, isFlipped, disabled }) => {
     return (
         <Box
             position='relative'
-            width='150px'
-            height='200px'
+            width={{ base: '100px', md: '150px' }}
+            height={{ base: '140px', md: '200px' }}
             my={3} boxShadow='md'>
             <Box
                 position='absolute'
