@@ -254,6 +254,7 @@ function App() {
             <Modal
                 isOpen={(gameOver || isGameComplete) && !showAbout && !showMenu && cards.length > 0}
                 onClose={() => { }}
+                size={{ base: 'xs', md: 'xs', lg: 'lg'}}
                 isCentered>
                 <ModalOverlay size='100%'/>
                 <ModalContent p='2rem'>
